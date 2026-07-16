@@ -75,6 +75,17 @@ What happens instead (screenshots / errors).
 (Optional, last — root cause, suspect code, links.)
 ```
 
+### Bugs a human cannot reproduce (infra / outages / race conditions)
+
+If the repro is not something a person can perform on demand (an upstream outage,
+a server restart, a timing race, corrupted state), do NOT write pseudo-repro steps.
+Replace `## Steps to reproduce` with `## What happened` — a short plain-language
+narrative of the incident and its user-visible impact ("During the X outage on
+<date>, some users experienced …"). Keep `## Expected` / `## Actual` focused on
+symptoms. `## How to test` lists only checks QA can actually perform; the technical
+trigger conditions and any dev-only verification (logs, Redis, metrics) go under
+`## Engineering Notes`.
+
 ## Template: Spike
 
 ```markdown
