@@ -103,9 +103,12 @@ Doc / decision / prototype / follow-up tickets.
 - Projects are company-managed / classic (POD2 project id 10013).
 - POD2 Story Points field is `customfield_10033` (NOT customfield_10016). Verify the
   Story Points field per project via createmeta before setting points elsewhere.
-- API/MCP limitation: the markdown path cannot create native Jira checkboxes —
-  `- [ ]` renders as escaped literal text. Use plain `*` bullets under
-  `## Acceptance criteria`.
+- Checkboxes: to get real, tickable Jira checkboxes under `## Acceptance criteria`,
+  create/edit the description as ADF (`contentFormat: "adf"`) using `taskList` /
+  `taskItem` nodes — this reliably produces interactive checkboxes (verified by
+  write-then-read-back). The markdown path is unreliable for `- [ ]` (sometimes a
+  real task list, sometimes literal `[ ]` text) — only if you must use markdown,
+  fall back to plain `*` bullets.
 
 ## Self-check before submitting
 
