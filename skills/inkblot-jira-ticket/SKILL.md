@@ -8,16 +8,22 @@ description: Inkblot Jira ticket writing convention. Use whenever creating, draf
 When creating or editing a ticket, structure the description exactly as below.
 Fixed heading names — do not rename, reorder, or invent sections.
 
-## Two hard rules
+## Three hard rules
 
-1. Acceptance criteria MUST live in the description body under a `## Acceptance criteria`
+1. NO PII or PHI in tickets — ever. No patient/client names, emails, phone numbers,
+   health card numbers, diagnoses, session content, or anything identifying a person.
+   Refer to people by role + opaque ID (e.g. "client user_id 12345", "appointment
+   977096", support ref "ATS-13371"). Redact identifying details from screenshots,
+   logs, and stack traces before attaching. This applies to every section, including
+   Engineering Notes and comments.
+2. Acceptance criteria MUST live in the description body under a `## Acceptance criteria`
    heading, as a checklist. NEVER put them only in Jira's side-panel "Acceptance criteria"
    checklist field — QA, exports, PR links, and AI tools miss it there.
-2. `## Context`, `## Scope`, `## Acceptance criteria`, and `## How to test` MUST use plain,
-   human-friendly language that non-technical readers (QA, PM, support) can understand.
-   Anything that only makes sense to developers — code paths, class/function names, SQL,
-   stack traces, architecture detail — belongs under `## Engineering Notes`, below the
-   `---` divider.
+3. `## Context`, `## Scope`, `## Acceptance criteria`, and `## How to test` (when present)
+   MUST use plain, human-friendly language that non-technical readers (QA, PM, support)
+   can understand. Anything that only makes sense to developers — code paths,
+   class/function names, SQL, stack traces, architecture detail — belongs under
+   `## Engineering Notes`, below the `---` divider.
 
 ## Template: Task / Story
 
@@ -34,9 +40,9 @@ What's in. What's explicitly out. Described as user/system behavior, not impleme
 * Include env / feature-flag prerequisites QA needs
 
 ## How to test
-(Optional — include ONLY when verification setup isn't obvious. Plain language:
+(Optional — include ONLY when the user explicitly asks for it. Plain language:
 URLs/routes to visit, test accounts to use, flags to toggle, data setup steps.
-Skip entirely if the acceptance criteria are self-explanatory.)
+Omit by default.)
 
 ---
 
@@ -67,7 +73,7 @@ What happens instead (screenshots / errors).
 * The observable behavior that proves the fix
 
 ## How to test
-(Optional — only if retesting needs non-obvious setup beyond the repro steps.)
+(Optional — include ONLY when the user explicitly asks for it.)
 
 ---
 
@@ -123,9 +129,12 @@ Doc / decision / prototype / follow-up tickets.
 
 ## Self-check before submitting
 
-1. Does `## Acceptance criteria` exist in the description body with ≥1 testable item?
-2. Could a non-technical reader (QA, PM, support) understand everything above the `---`,
+1. Is the ticket free of PII/PHI (names, emails, phone numbers, health data,
+   session content) — including screenshots, logs, and Engineering Notes?
+2. Does `## Acceptance criteria` exist in the description body with ≥1 testable item?
+3. Could a non-technical reader (QA, PM, support) understand everything above the `---`,
    including `## How to test` if present?
-3. Is all technical detail (code paths, PRs, root cause, dev jargon) below the `---`
+4. Is `## How to test` omitted unless the user explicitly asked for it?
+5. Is all technical detail (code paths, PRs, root cause, dev jargon) below the `---`
    in `## Engineering Notes`?
-4. Task/Story: is a user-story opening line used ONLY if a genuine end user exists?
+6. Task/Story: is a user-story opening line used ONLY if a genuine end user exists?
