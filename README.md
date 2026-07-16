@@ -16,12 +16,17 @@ With the [skills CLI](https://skills.sh) (works for Cursor, Claude Code,
 Copilot CLI, Codex, and more):
 
 ```sh
-# global — available in every project (recommended)
+# interactive — pick the skills and agents you want (recommended)
 npx skills add inkblot-therapy/ai-skills -g
 
-# or project-level
-npx skills add inkblot-therapy/ai-skills
+# install a specific skill directly
+npx skills add inkblot-therapy/ai-skills -g -s inkblot-jira-ticket
+
+# see what's available without installing
+npx skills add inkblot-therapy/ai-skills -l
 ```
+
+Drop `-g` to install project-level instead of globally.
 
 To update later:
 
