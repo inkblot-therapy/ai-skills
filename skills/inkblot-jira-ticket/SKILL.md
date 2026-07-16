@@ -146,7 +146,8 @@ Keep every step above the `---` in language QA understands; push dev-only verifi
   interleaved through the ticket. When in doubt whether something is "too technical",
   move it to Engineering Notes.
 - Summary (title): concise, imperative, specific. No trailing period.
-- Do not backfill old tickets to this format.
+- Do not bulk-backfill old/closed tickets. Reformatting open, not-yet-started tickets
+  is fine when the assignee asks for it.
 
 ## Jira specifics (inkblottherapy.atlassian.net)
 
