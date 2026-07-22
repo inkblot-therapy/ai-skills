@@ -161,6 +161,19 @@ Keep every step above the `---` in language QA understands; push dev-only verifi
   rely on the markdown `- [ ]` path: it is inconsistent (sometimes a real task list,
   sometimes literal `[ ]` text). Only if ADF is truly unavailable, fall back to plain
   `*` bullets.
+- Collapsible Engineering Notes (optional): to keep technical detail tucked away by
+  default, `## Engineering Notes` may be rendered as an ADF `expand` node instead of a
+  plain heading — `{ "type": "expand", "attrs": { "title": "Engineering Notes" },
+  "content": [ ...block content... ] }`, placed below the `---` divider. When you do
+  this, the expand's `title` replaces the heading (don't emit both a `## Engineering
+  Notes` heading AND an expand titled the same). Requires `contentFormat: "adf"`: the
+  markdown path silently flattens `expand`, dropping the collapsible wrapper and
+  hoisting its content inline. The collapse is purely visual in the Jira web UI — the
+  content is always returned in full by the API (verbatim in an ADF fetch, hoisted
+  inline in a markdown fetch), so any AI agent reading the ticket still sees the notes.
+  Verify persistence by re-fetching with `responseContentFormat: "adf"` (the tool echoes
+  the saved description as markdown, which flattens `expand`, so the markdown echo alone
+  can't confirm the node saved).
 
 ## Self-check before submitting
 
