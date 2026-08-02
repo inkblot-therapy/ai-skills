@@ -1,6 +1,6 @@
 ---
 name: inkblot-jira-ticket
-description: Inkblot Jira ticket writing convention. Use whenever creating, drafting, or editing a Jira ticket on inkblottherapy.atlassian.net (POD1, POD2, or any pod) — Tasks, Stories, Bugs, Spikes, and Sub-tasks. Ensures consistent structure and discoverable acceptance criteria for QA.
+description: Inkblot Jira ticket writing convention. Use whenever creating, drafting, editing, or reviewing a Jira ticket on inkblottherapy.atlassian.net (POD1, POD2, or any pod) — Tasks, Stories, Bugs, Spikes, and Sub-tasks. Ensures consistent structure and discoverable acceptance criteria for QA.
 ---
 
 # Inkblot Jira Ticket Convention
@@ -190,3 +190,43 @@ Keep every step above the `---` in language QA understands; push dev-only verifi
 5. Is all technical detail (code paths, PRs, root cause, dev jargon) below the `---`
    in `## Engineering Notes`?
 6. Task/Story: is a user-story opening line used ONLY if a genuine end user exists?
+
+## Review pass
+
+Before creating, run the Self-check as a graded review, not a mental yes/no. This
+catches the mistakes that quietly slip past a drafter.
+
+Two modes:
+
+- **Self-review (always).** After drafting, walk each Self-check item and grade it.
+- **Independent review (recommended for any non-trivial ticket).** Have a SEPARATE
+  agent/context run the same rubric adversarially against the draft. The author who
+  wrote the ticket tends to rubber-stamp it; a fresh pass is where the real defects
+  surface. Give the reviewer this skill's rules plus the draft, and ask for the
+  structured output below.
+
+Review output format:
+
+1. Compliance checklist — for each of the 6 Self-check items: **PASS / FAIL / N/A**
+   with a one-line justification.
+2. Issues found — each tagged with severity and, where useful, a concrete suggested
+   rewrite:
+   - **blocker** — violates a hard rule (PII/PHI anywhere, acceptance criteria not in
+     the body as a taskList, developer-only detail above the `---`) or is factually
+     wrong. Must fix before creating.
+   - **should-fix** — a convention or clarity gap that will mislead QA or misrepresent
+     scope (e.g. the summary promises one thing but the acceptance criteria test
+     another). Fix unless there's a deliberate reason not to.
+   - **nice-to-have** — wording/polish. Optional.
+3. Verdict — "ready to create as-is" or the minimal changes needed first.
+
+Recurring misses worth checking explicitly (each has bitten a real ticket):
+
+- **Hidden PII.** A person's name riding along in a branch name, PR/commit link, or
+  pasted log — hard-rule 1 applies to every section, including Engineering Notes.
+- **Title vs acceptance-criteria drift.** The summary describes a narrower or wider
+  behavior than the criteria actually verify. Make them agree.
+- **Acceptance criteria that restate implementation** ("adds a CI job that runs
+  RuboCop") instead of observable behavior ("the check fails when …").
+- **`## How to test` present when nobody asked for it,** or too vague for a QA tester
+  who has never seen the code.
