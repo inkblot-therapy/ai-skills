@@ -9,6 +9,8 @@ Agent Skills–compliant tool) to perform team tasks in a consistent, repeatable
 | Skill | Purpose |
 |---|---|
 | [`inkblot-jira-ticket`](skills/inkblot-jira-ticket/SKILL.md) | Jira ticket writing convention — consistent structure, QA-discoverable acceptance criteria, plain language above the fold, technical detail under Engineering Notes. |
+| [`inkblot-branch-naming`](skills/inkblot-branch-naming/SKILL.md) | Git branch naming — when a ticket exists, `pod2-2291-short-kebab`; no rule when there is no ticket. |
+| [`inkblot-commit-message`](skills/inkblot-commit-message/SKILL.md) | Git commit subject — when a ticket exists, `POD2-2291: Fix …`; no Conventional Commits; no rule when there is no ticket. |
 
 ## Install
 
