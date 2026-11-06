@@ -13,6 +13,21 @@ The tools include Cursor, GitHub Copilot CLI, Claude Code, Codex, and any tool t
 | [`inkblot-commit-message`](skills/inkblot-commit-message/SKILL.md) | Write a git commit subject. Use `POD2-2291: Fix ...` when a ticket exists. Do not use Conventional Commits. Do not apply a rule when no ticket exists. |
 | [`inkblot-simplified-technical-english`](skills/inkblot-simplified-technical-english/SKILL.md) | Write prose in Simplified Technical English (STE). Limit sentence length. Use active voice and simple words. Put one instruction in each sentence. |
 
+## Optional: Simplified Technical English
+
+This skill is not on `main`.
+Install tag `ste-v1` when you want it.
+The tag points at branch `add-simplified-technical-english-skill`.
+
+```sh
+npx skills add https://github.com/inkblot-therapy/ai-skills/tree/ste-v1/skills/inkblot-simplified-technical-english -g
+```
+
+Use the tree URL.
+It checks out that tag.
+Do not use `inkblot-therapy/ai-skills@ste-v1` alone.
+Some CLI versions install `main` instead of the tag.
+
 ## Install
 
 Use the [skills CLI](https://skills.sh).
