@@ -1,34 +1,58 @@
 ---
 name: inkblot-commit-message
-description: Inkblot git commit message convention. Use when writing a commit message, creating a git commit, amending a commit message, or when the user asks how to format a commit subject.
+description: Write Inkblot git commit subjects. Use this skill when you write a commit message, amend a subject, or format a commit.
 ---
 
 # Inkblot commit messages
 
-This convention is **only required when the work has a Jira ticket**. If there is no ticket, do not invent an ID, do not ask for a ticket, and do not restrict the subject.
+Use this rule only when the work has a Jira ticket.
+Skip this rule when the work has no ticket.
+Do not invent a ticket id.
+Do not ask for a ticket.
+Do not change the subject to fit this rule.
 
-## Ticket work (required)
+## Ticket work
 
 ```text
 <TICKET-ID>: <Concise imperative summary>
 ```
 
-1. Full Jira key, **uppercase**, **one** ticket per commit (e.g. `POD2-2291`, not `pod2-2291` and not `2-2291`)
-2. Colon and space after the key, then an imperative summary (“Fix …”, “Add …”, “Rename …”)
-3. Sentence case. One line. Aim for ~72 characters. Say the outcome, not a file list.
-4. Put the ticket **this commit** belongs to in the subject — not every ticket on the PR, and not always the branch name.
+1. Use the full Jira key in uppercase.
+   Use one ticket for each commit.
+   Write `POD2-2291`.
+   Do not write `pod2-2291`.
+   Do not write `2-2291`.
+2. Put a colon and one space after the key.
+   Write an imperative summary.
+   Start with a verb such as Fix, Add, or Rename.
+3. Use sentence case.
+   Use one line.
+   Aim for about 72 characters.
+   State the outcome.
+   Do not list files.
+4. Put the ticket for this commit in the subject.
+   Do not list every ticket on the pull request.
+   Do not always copy the branch name.
 
-Do **not** use Conventional Commits prefixes (`feat:`, `fix:`, `chore:`). The ticket is the classifier.
+Do not use a Conventional Commits prefix.
+Examples: `feat:`, `fix:`, `chore:`.
+The ticket classifies the work.
 
-### Multiple tickets on one piece of work
+### Several tickets on one piece of work
 
-A branch/PR may list several tickets. Each commit still has **one** key: the ticket that commit implements or fixes.
+A branch or a pull request may list several tickets.
+Give each commit one key.
+Use the ticket that the commit implements or fixes.
 
-- Default to the branch ticket (`pod2-2291-…` → `POD2-2291: …`) when the commit is for that work.
-- If this commit is for a different linked ticket, switch the subject to that key.
-- If it is unclear which ticket this commit belongs to, ask. Do not invent an ID and do not stack keys (`POD2-2276-2277: …`).
+- Use the branch ticket when the commit is for that work.
+  A branch named `pod2-2291-...` uses the subject `POD2-2291: ...`.
+- Switch the subject key when this commit is for a different linked ticket.
+- Ask when the ticket for this commit is unclear.
+  Do not invent an id.
+  Do not stack keys.
+  Do not write `POD2-2276-2277: ...`.
 
-Example — branch `pod2-2276-restrict-provider-access`, also linked to `POD2-2277`:
+Example. The branch `pod2-2276-restrict-provider-access` is also linked to `POD2-2277`.
 
 - `POD2-2276: Restrict availability reserved-for-client`
 - `POD2-2277: Hide estimates from unauthorized clients`
@@ -42,19 +66,28 @@ Example — branch `pod2-2276-restrict-provider-access`, also linked to `POD2-22
 
 ### Body
 
-No rule. Do not require a body and do not add one unless the user asks. Context lives in Jira.
+Do not require a body.
+Do not add a body unless the user asks.
+Keep extra context in Jira.
 
-### Do not (ticket work only)
+### Do not use these forms for ticket work
 
-- `feat: add renewal dates` / `fix: …` — no Conventional Commits
-- `pod2-2291: Fix no-show …` — uppercase the key in commits
-- `2-2291: Fix no-show …` — not a Jira key
-- `POD2-2291 - fix stuff` — use `: `, not ` - `
-- `POD2-2291: Fixed bug` — prefer imperative (`Fix …`)
-- `POD2-2276-2277: …` — one primary ticket in the subject
-- Inventing a ticket ID
+- Do not write `feat: add renewal dates` or `fix: ...`.
+  Do not use Conventional Commits.
+- Do not write `pod2-2291: Fix no-show ...`.
+  Use uppercase for the key in a commit.
+- Do not write `2-2291: Fix no-show ...`.
+  That text is not a Jira key.
+- Do not write `POD2-2291 - fix stuff`.
+  Use `: `.
+  Do not use ` - `.
+- Do not write `POD2-2291: Fixed bug`.
+  Use the imperative form `Fix ...`.
+- Do not write `POD2-2276-2277: ...`.
+  Put one primary ticket in the subject.
+- Do not invent a ticket id.
 
-### Validation (for hooks / lint)
+### Validation for a hook or a linter
 
 ```text
 ^[A-Z][A-Z0-9]+-[0-9]+: .+
@@ -62,13 +95,31 @@ No rule. Do not require a body and do not add one unless the user asks. Context 
 
 ## No ticket
 
-No subject rule. Merge commits, syncs, and other untracked work can use any subject.
+Do not apply a subject rule.
+Use any subject for a merge commit, a sync, or other work with no ticket.
 
 ## Why
 
-- **Ticket in the subject:** Jira Smart Commits and GitHub–Jira linking read the commit subject. The branch name is not enough.
-- **Uppercase here, lowercase on branches:** Trackers expect the canonical `POD2-2291:` form. Branches stay lowercase to avoid git case-sensitivity.
-- **No `feat:` / `fix:`:** The ticket already classifies the work. Two prefixes only make the subject longer.
-- **Rule only when a ticket exists:** Same as branches. Do not block chores, merges, or hotfixes that have no ticket.
-- **One ticket per commit, not per branch:** Jira attaches the commit to the key in the subject. If one PR covers several tickets, each commit should land on the ticket it actually changes. Stacking IDs in the subject breaks grep, hooks, and that attachment.
-- **No body convention:** The ticket already has context. A second paragraph in git does not help Jira linking and is easy for agents to invent.
+- Put the ticket in the subject.
+  Jira Smart Commits read the commit subject.
+  GitHub to Jira linking reads the commit subject.
+  The branch name is not enough.
+- Use uppercase in a commit subject.
+  Use lowercase in a branch name.
+  Trackers expect the form `POD2-2291:`.
+  A lowercase branch avoids a git case clash.
+- Do not add `feat:` or `fix:`.
+  The ticket already classifies the work.
+  A second prefix only makes the subject longer.
+- Apply the rule only when a ticket exists.
+  Use the same limit as branch names.
+  Do not block a chore, a merge, or a hotfix that has no ticket.
+- Use one ticket for each commit.
+  Do not use one ticket for the whole branch.
+  Jira attaches the commit to the key in the subject.
+  When one pull request covers several tickets, point each commit at the ticket it changes.
+  A stacked id breaks search, hooks, and that attachment.
+- Do not set a body rule.
+  The ticket already has the context.
+  A second paragraph in git does not help Jira linking.
+  An agent can invent that paragraph.

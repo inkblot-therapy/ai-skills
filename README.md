@@ -1,45 +1,47 @@
 # ai-skills
 
-Shared [Agent Skills](https://agentskills.io) for Inkblot devs, PMs, and QA.
-Skills teach AI tools (Cursor, GitHub Copilot CLI, Claude Code, Codex, and any
-Agent Skills–compliant tool) to perform team tasks in a consistent, repeatable way.
+This repo shares [Agent Skills](https://agentskills.io) for Inkblot developers, product managers, and QA.
+A skill teaches an AI tool to do a team task the same way each time.
+The tools include Cursor, GitHub Copilot CLI, Claude Code, Codex, and any tool that follows the Agent Skills spec.
 
 ## Skills
 
 | Skill | Purpose |
 |---|---|
-| [`inkblot-jira-ticket`](skills/inkblot-jira-ticket/SKILL.md) | Jira ticket writing convention — consistent structure, QA-discoverable acceptance criteria, plain language above the fold, technical detail under Engineering Notes. |
-| [`inkblot-branch-naming`](skills/inkblot-branch-naming/SKILL.md) | Git branch naming — when a ticket exists, `pod2-2291-short-kebab`; no rule when there is no ticket. |
-| [`inkblot-commit-message`](skills/inkblot-commit-message/SKILL.md) | Git commit subject — when a ticket exists, `POD2-2291: Fix …`; no Conventional Commits; no rule when there is no ticket. |
-| [`inkblot-simplified-technical-english`](skills/inkblot-simplified-technical-english/SKILL.md) | Simplified Technical English (STE) for all prose — sentence length limits, active voice, simple words, one instruction per sentence. |
+| [`inkblot-jira-ticket`](skills/inkblot-jira-ticket/SKILL.md) | Write a Jira ticket with a fixed structure. Put acceptance criteria where QA can find them. Use plain language above the divider. Put technical detail under Engineering Notes. |
+| [`inkblot-branch-naming`](skills/inkblot-branch-naming/SKILL.md) | Name a git branch. Use `pod2-2291-short-kebab` when a ticket exists. Do not apply a rule when no ticket exists. |
+| [`inkblot-commit-message`](skills/inkblot-commit-message/SKILL.md) | Write a git commit subject. Use `POD2-2291: Fix ...` when a ticket exists. Do not use Conventional Commits. Do not apply a rule when no ticket exists. |
+| [`inkblot-simplified-technical-english`](skills/inkblot-simplified-technical-english/SKILL.md) | Write prose in Simplified Technical English (STE). Limit sentence length. Use active voice and simple words. Put one instruction in each sentence. |
 
 ## Install
 
-With the [skills CLI](https://skills.sh) (works for Cursor, Claude Code,
-Copilot CLI, Codex, and more):
+Use the [skills CLI](https://skills.sh).
+It works for Cursor, Claude Code, Copilot CLI, Codex, and other tools.
 
 ```sh
-# interactive — pick the skills and agents you want (recommended)
+# Pick the skills and the agents you want. Use this path.
 npx skills add inkblot-therapy/ai-skills -g
 
-# install a specific skill directly
+# Install one skill.
 npx skills add inkblot-therapy/ai-skills -g -s inkblot-jira-ticket
 
-# see what's available without installing
+# List the skills. Do not install them.
 npx skills add inkblot-therapy/ai-skills -l
 ```
 
-Drop `-g` to install project-level instead of globally.
+Omit `-g` to install the skill for one project.
 
-To update later:
+Update later with this command:
 
 ```sh
 npx skills update
 ```
 
-### Manual install (no Node)
+### Manual install
 
-Clone and symlink a skill folder into your tool's skills directory, e.g.:
+Use this path when Node is not available.
+Clone the repo.
+Link a skill folder into the skills directory for your tool.
 
 ```sh
 git clone git@github.com:inkblot-therapy/ai-skills.git
@@ -48,12 +50,16 @@ ln -s "$PWD/ai-skills/skills/inkblot-jira-ticket" ~/.claude/skills/    # Claude 
 ln -s "$PWD/ai-skills/skills/inkblot-jira-ticket" ~/.cursor/skills/    # Cursor
 ```
 
-`git pull` then updates all tools at once.
+Run `git pull` to update every linked tool.
 
 ## Contributing
 
-1. One folder per skill under `skills/<skill-name>/` containing a `SKILL.md`
-   with `name` and `description` frontmatter ([spec](https://agentskills.io)).
-2. Keep skills small and focused; write instructions the way you'd brief a new teammate.
-3. Open a PR — changes to a convention (like the Jira ticket format) should get
-   a quick look from the pod that uses it.
+1. Put one skill in each folder under `skills/<skill-name>/`.
+   Add a `SKILL.md` file.
+   Include `name` and `description` in the frontmatter.
+   Follow the [Agent Skills spec](https://agentskills.io).
+2. Keep each skill small.
+   Write each instruction as you would brief a new teammate.
+3. Open a pull request.
+   Ask the pod that uses a convention to review a change to that convention.
+   The Jira ticket format is one example.
